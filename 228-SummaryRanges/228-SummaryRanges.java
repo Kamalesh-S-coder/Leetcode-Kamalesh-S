@@ -1,0 +1,30 @@
+// Last updated: 11/08/2026, 20:56:10
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> res = new ArrayList<>();
+        if (nums.length == 0) return res;
+
+        int start = nums[0];
+        
+        for (int i = 1; i < nums.length; i++) {
+            // Check if current number is not consecutive
+            if (nums[i] != nums[i - 1] + 1) {
+                if (start == nums[i - 1]) {
+                    res.add(String.valueOf(start));
+                } else {
+                    res.add(start + "->" + nums[i - 1]);
+                }
+                start = nums[i];
+            }
+        }
+        
+        // Handle the last range
+        if (start == nums[nums.length - 1]) {
+            res.add(String.valueOf(start));
+        } else {
+            res.add(start + "->" + nums[nums.length - 1]);
+        }
+
+        return res;
+    }
+}
